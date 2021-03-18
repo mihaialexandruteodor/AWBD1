@@ -1,0 +1,11 @@
+com\awbd\lab4\domain\Participant.class
+com\awbd\lab4\domain\Info.class
+com\awbd\lab4\repositories\ParticipantRepository.class
+com\awbd\lab4\domain\Currency.class
+com\awbd\lab4\Lab4Application.class
+com\awbd\lab4\domain\Bid.class
+com\awbd\lab4\repositories\BidRepository.class
+com\awbd\lab4\domain\Category.class
+com\awbd\lab4\repositories\ProductRepository.class
+com\awbd\lab4\domain\Product.class
+com\awbd\lab4\repositories\CatagoryRepository.class
