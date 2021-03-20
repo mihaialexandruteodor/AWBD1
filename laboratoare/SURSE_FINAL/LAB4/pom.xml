@@ -14,7 +14,9 @@
 	<name>lab4</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>15</java.version>
+		<java.version>11</java.version>
+		<!-- The main class to start by executing java -jar -->
+		<start-class>com.awbd.lab4.Lab4Application</start-class>
 	</properties>
 	<dependencies>
 		<dependency>
