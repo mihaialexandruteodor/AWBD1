@@ -1,5 +1,4 @@
-FROM openjdk:8-jdk-alpine
-
-COPY build/libs/guestbook*.jar app.jar
-
-ENTRYPOINT ["java","-Dspring.profiles.active=prod","-jar","/app.jar"]
+FROM openjdk:11-oracle
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
