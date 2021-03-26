@@ -1,7 +1,7 @@
-package com.awbd.lab7.repositories;
+package com.awbd.proiect.repositories;
 
 
-import com.awbd.lab7.domain.Bid;
+import com.awbd.proiect.domain.Bid;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

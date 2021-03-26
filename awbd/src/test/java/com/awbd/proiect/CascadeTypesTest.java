@@ -1,8 +1,8 @@
-package com.awbd.lab7;
+package com.awbd.proiect;
 
-import com.awbd.lab7.domain.Currency;
-import com.awbd.lab7.domain.Participant;
-import com.awbd.lab7.domain.Product;
+import com.awbd.proiect.domain.Currency;
+import com.awbd.proiect.domain.Participant;
+import com.awbd.proiect.domain.Product;
 import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

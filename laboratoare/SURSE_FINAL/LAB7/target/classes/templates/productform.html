@@ -59,7 +59,7 @@
                         <label for="currency">Currency: </label>
                         <select id="currency" name="currency" th:field="*{currency}">
                             <option
-                                    th:each="currencyOpt:${T(com.awbd.lab7.domain.Currency).values()}"
+                                    th:each="currencyOpt:${T(com.awbd.proiect.domain.Currency).values()}"
                                     th:value="${currencyOpt}" th:text="${currencyOpt.getDescription()}">
                             </option>
                         </select>

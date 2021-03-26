@@ -1,4 +1,4 @@
-package com.awbd.lab7.exceptions;
+package com.awbd.proiect.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

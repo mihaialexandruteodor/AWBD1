@@ -1,8 +1,8 @@
-package com.awbd.lab7.services;
+package com.awbd.proiect.services;
 
-import com.awbd.lab7.domain.Info;
-import com.awbd.lab7.domain.Product;
-import com.awbd.lab7.repositories.ProductRepository;
+import com.awbd.proiect.domain.Info;
+import com.awbd.proiect.domain.Product;
+import com.awbd.proiect.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

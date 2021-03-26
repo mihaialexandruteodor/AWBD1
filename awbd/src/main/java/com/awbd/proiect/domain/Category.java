@@ -1,4 +1,4 @@
-package com.awbd.lab7.domain;
+package com.awbd.proiect.domain;
 
 
 import lombok.Data;

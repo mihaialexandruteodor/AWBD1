@@ -1,14 +1,11 @@
-package com.awbd.lab7.controllers;
+package com.awbd.proiect.controllers;
 
-import com.awbd.lab7.domain.Participant;
-import com.awbd.lab7.exceptions.ResourceNotFoundException;
-import com.awbd.lab7.services.ParticipantService;
+import com.awbd.proiect.domain.Participant;
+import com.awbd.proiect.services.ParticipantService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ParticipantController {

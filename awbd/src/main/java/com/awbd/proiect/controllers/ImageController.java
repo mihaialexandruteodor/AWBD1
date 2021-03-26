@@ -1,9 +1,9 @@
-package com.awbd.lab7.controllers;
+package com.awbd.proiect.controllers;
 
-import com.awbd.lab7.domain.Info;
-import com.awbd.lab7.domain.Product;
-import com.awbd.lab7.services.ImageService;
-import com.awbd.lab7.services.ProductService;
+import com.awbd.proiect.domain.Info;
+import com.awbd.proiect.domain.Product;
+import com.awbd.proiect.services.ImageService;
+import com.awbd.proiect.services.ProductService;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

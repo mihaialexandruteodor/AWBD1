@@ -1,13 +1,13 @@
-package com.awbd.lab7;
+package com.awbd.proiect;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Lab7Application {
+public class ProiectAWBD {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Lab7Application.class, args);
+		SpringApplication.run(ProiectAWBD.class, args);
 	}
 
 }

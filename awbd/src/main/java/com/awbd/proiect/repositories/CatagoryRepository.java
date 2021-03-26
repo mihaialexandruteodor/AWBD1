@@ -1,6 +1,6 @@
-package com.awbd.lab7.repositories;
+package com.awbd.proiect.repositories;
 
-import com.awbd.lab7.domain.Category;
+import com.awbd.proiect.domain.Category;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

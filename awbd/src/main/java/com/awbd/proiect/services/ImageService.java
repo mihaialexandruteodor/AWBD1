@@ -1,4 +1,4 @@
-package com.awbd.lab7.services;
+package com.awbd.proiect.services;
 
 import org.springframework.web.multipart.MultipartFile;
 
