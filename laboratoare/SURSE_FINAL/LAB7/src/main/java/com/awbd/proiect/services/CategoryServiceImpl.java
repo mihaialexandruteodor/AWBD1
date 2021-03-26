@@ -1,7 +1,7 @@
-package com.awbd.lab7.services;
+package com.awbd.proiect.services;
 
-import com.awbd.lab7.domain.Category;
-import com.awbd.lab7.repositories.CatagoryRepository;
+import com.awbd.proiect.domain.Category;
+import com.awbd.proiect.repositories.CatagoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

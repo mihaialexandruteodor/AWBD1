@@ -1,7 +1,7 @@
-package com.awbd.lab7.controllers;
+package com.awbd.proiect.controllers;
 
-import com.awbd.lab7.domain.Product;
-import com.awbd.lab7.services.ProductService;
+import com.awbd.proiect.domain.Product;
+import com.awbd.proiect.services.ProductService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;

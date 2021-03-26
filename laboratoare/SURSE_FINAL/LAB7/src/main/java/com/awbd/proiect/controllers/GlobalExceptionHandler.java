@@ -1,6 +1,6 @@
-package com.awbd.lab7.controllers;
+package com.awbd.proiect.controllers;
 
-import com.awbd.lab7.exceptions.ResourceNotFoundException;
+import com.awbd.proiect.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

@@ -1,4 +1,4 @@
-package com.awbd.lab7.domain;
+package com.awbd.proiect.domain;
 
 public enum Currency {
     USD("USD $"), EUR("EUR"), GBP("GBP");

@@ -1,7 +1,7 @@
-package com.awbd.lab7.services;
+package com.awbd.proiect.services;
 
-import com.awbd.lab7.domain.Product;
-import com.awbd.lab7.repositories.ProductRepository;
+import com.awbd.proiect.domain.Product;
+import com.awbd.proiect.repositories.ProductRepository;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

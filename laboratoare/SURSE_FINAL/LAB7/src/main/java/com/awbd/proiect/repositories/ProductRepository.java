@@ -1,6 +1,6 @@
-package com.awbd.lab7.repositories;
+package com.awbd.proiect.repositories;
 
-import com.awbd.lab7.domain.Product;
+import com.awbd.proiect.domain.Product;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;

@@ -1,6 +1,6 @@
-package com.awbd.lab7.services;
+package com.awbd.proiect.services;
 
-import com.awbd.lab7.domain.Participant;
+import com.awbd.proiect.domain.Participant;
 
 public interface ParticipantService {
     Participant findById(Long l);

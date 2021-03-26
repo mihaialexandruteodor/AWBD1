@@ -1,6 +1,6 @@
-package com.awbd.lab7.repositories;
+package com.awbd.proiect.repositories;
 
-import com.awbd.lab7.domain.Product;
+import com.awbd.proiect.domain.Product;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;

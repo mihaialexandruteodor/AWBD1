@@ -1,7 +1,7 @@
-package com.awbd.lab7;
+package com.awbd.proiect;
 
-import com.awbd.lab7.domain.Product;
-import com.awbd.lab7.services.ProductService;
+import com.awbd.proiect.domain.Product;
+import com.awbd.proiect.services.ProductService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

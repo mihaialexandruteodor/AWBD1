@@ -1,10 +1,10 @@
-package com.awbd.lab7.controllers;
+package com.awbd.proiect.controllers;
 
-import com.awbd.lab7.domain.Category;
-import com.awbd.lab7.domain.Product;
-import com.awbd.lab7.services.CategoryService;
-import com.awbd.lab7.services.ImageService;
-import com.awbd.lab7.services.ProductService;
+import com.awbd.proiect.domain.Category;
+import com.awbd.proiect.domain.Product;
+import com.awbd.proiect.services.CategoryService;
+import com.awbd.proiect.services.ImageService;
+import com.awbd.proiect.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

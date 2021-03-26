@@ -1,6 +1,6 @@
-package com.awbd.lab7.repositories;
+package com.awbd.proiect.repositories;
 
-import com.awbd.lab7.domain.Participant;
+import com.awbd.proiect.domain.Participant;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
