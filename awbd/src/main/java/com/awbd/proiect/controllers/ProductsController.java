@@ -40,6 +40,26 @@ public class ProductsController {
         return "products";
     }*/
 
+    // SHOP REDIRECT AND CONTROLLER
+
+
+    @RequestMapping("/shop")
+    public ModelAndView shopList(){
+        ModelAndView modelAndView = new ModelAndView("products");
+        List<Product> products = productService.findAll();
+        modelAndView.addObject("products",products);
+        return modelAndView;
+    }
+
+    // ABOUT REDIRECT AND CONTROLLER
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/about")
+    public String index() {
+        return "about.html";
+    }
+
+    // FROM THE LAB BELOW
 
 
     @RequestMapping("/product/list")
