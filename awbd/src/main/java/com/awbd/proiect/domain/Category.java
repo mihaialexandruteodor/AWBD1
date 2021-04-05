@@ -18,7 +18,7 @@ public class Category {
 
     @ManyToMany(mappedBy = "categories",
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Product> products;
+    private List<Movie> movies;
 
 
 }

@@ -1,4 +1,4 @@
-package com.awbd.proiect;
+/*package com.awbd.proiect;
 
 
 import com.awbd.proiect.domain.Currency;
@@ -55,4 +55,4 @@ public class EntityManagerTest {
 
 
 }
-
+*/

@@ -24,15 +24,21 @@ public class Movie {
 
     private Boolean restored;
 
-    @OneToOne(mappedBy = "product",
+    @OneToOne(mappedBy = "movie",
             cascade = CascadeType.ALL, orphanRemoval = true)
     private Info info;
 
+
     @ManyToMany(
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "movie_category",
+    @JoinTable(name = "category",
             joinColumns = @JoinColumn(name = "movie_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "category_id",
                     referencedColumnName = "id"))
     private List<Category> categories;
+
+    public void removeCategory(Category category) {
+        category.getMovies().remove(this);
+        categories.remove(category);
+    }
 }

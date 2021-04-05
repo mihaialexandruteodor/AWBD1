@@ -19,7 +19,7 @@ public class Info {
     private String description;
 
     @OneToOne
-    private Product product;
+    private Movie movie;
 
 
 }

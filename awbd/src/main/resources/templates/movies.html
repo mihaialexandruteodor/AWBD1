@@ -1,45 +1,139 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Products</title>
-    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css" />
-    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+  text-align: center;
+  padding: 32px;
+}
+
+.row {
+  display: -ms-flexbox; /* IE 10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE 10 */
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create two equal columns that sits next to each other */
+.column {
+  -ms-flex: 50%; /* IE 10 */
+  flex: 50%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+}
+
+/* Style the buttons */
+.btn {
+  border: none;
+  outline: none;
+  padding: 10px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.btn:hover {
+  background-color: #ddd;
+}
+
+.btn.active {
+  background-color: #666;
+  color: white;
+}
+</style>
 </head>
 <body>
-<div class="container">
-    <table class="table table-hover ">
-        <thead class="thead-inverse">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Code</th>
-            <th>Reserved price</th>
-            <th>Info</th>
-            <th>Delete</th>
-        </tr>
-        </thead>
-        <tr th:each="product, stat : ${products}"
-            th:class="${stat.odd}? 'table-light':'table-dark'"
-                >
-            <td th:text="${product.id}">1</td>
-            <td th:text="${product.name}">Product 1</td>
-            <td th:text="${product.code}">Code</td>
-            <td th:text="${product.reservePrice}">Reserved price</td>
-            <td><a href="#" th:href="@{'/product/info/' + ${product.id}}">Info</a></td>
-            <td><a href="#" th:href="@{'/product/delete/' + ${product.id}}">Delete</a></td>
-        </tr>
-    </table>
+
+<!-- Header -->
+<div class="header" id="myHeader">
+    <h1>Shop</h1>
+    <p>Click on the buttons to change the grid view.</p>
+    <button class="btn" onclick="one()">1</button>
+    <button class="btn active" onclick="two()">2</button>
+    <button class="btn" onclick="four()">4</button>
 </div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <a class="btn btn-primary" role="button" th:href="@{'/product/new'}">add product</a>
-        </div>
-        <div class="col-md-6">
-            <a class="btn btn-primary" role="button" th:href="@{'/participant/new'}">register</a>
-        </div>
+
+<!-- Photo Grid -->
+<div class="row">
+    <div class="column">
+        <img src="https://m.media-amazon.com/images/M/MV5BN2RiZDg2MGUtMTA5NS00NjQ3LTgzNWQtOWIwMTc3NjVhYjY5XkEyXkFqcGdeQXVyNjM3MDIwNjc@._V1_FMjpg_UX1000_.jpg" style="width:100%">
+        <img src="https://static01.nyt.com/images/2020/11/27/arts/26gateway-mood1/26gateway-mood1-superJumbo-v2.jpg" style="width:100%">
+        <img src="https://content.internetvideoarchive.com/content/hdphotos/11057/011057/011057_1280x720_570475_099.jpg" style="width:100%">
+    </div>
+    <div class="column">
+        <img src="https://i.ytimg.com/vi/h7L4KnE_mxw/maxresdefault.jpg" style="width:100%">
+        <img src="https://images.mubicdn.net/images/film/41719/cache-158451-1468298842/image-w1280.jpg" style="width:100%">
+        <img src="https://i.ytimg.com/vi/cvIIe1wE67U/maxresdefault.jpg" style="width:100%">
+    </div>
+    <div class="column">
+        <img src="https://sanet.pics/storage-6/0520/B0fHwChMwZcPsDmFiqllQkzWjBpsTUCe.png" style="width:100%">
+        <img src="https://images-na.ssl-images-amazon.com/images/I/81rAZbzfEyL._AC_SL1500_.jpg" style="width:100%">
+        <img src="hhttps://m.media-amazon.com/images/I/51xpQ1s+2IL.jpg" style="width:100%">
+    </div>
+    <div class="column">
+        <img src="https://flxt.tmsimg.com/assets/p13225986_p_v8_aw.jpg" style="width:100%">
+        <img src="https://anatomyofascream.files.wordpress.com/2016/06/the-wailing.jpg" style="width:100%">
+        <img src="https://static.cinemagia.ro/img/db/movie/58/95/46/new-world-820674l.jpg" style="width:100%">
     </div>
 </div>
+
+<script>
+// Get the elements with class="column"
+var elements = document.getElementsByClassName("column");
+
+// Declare a loop variable
+var i;
+
+// Full-width images
+function one() {
+    for (i = 0; i < elements.length; i++) {
+    elements[i].style.msFlex = "100%";  // IE10
+    elements[i].style.flex = "100%";
+  }
+}
+
+// Two images side by side
+function two() {
+  for (i = 0; i < elements.length; i++) {
+    elements[i].style.msFlex = "50%";  // IE10
+    elements[i].style.flex = "50%";
+  }
+}
+
+// Four images side by side
+function four() {
+  for (i = 0; i < elements.length; i++) {
+    elements[i].style.msFlex = "25%";  // IE10
+    elements[i].style.flex = "25%";
+  }
+}
+
+// Add active class to the current button (highlight it)
+var header = document.getElementById("myHeader");
+var btns = header.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
+</script>
+
 </body>
 </html>

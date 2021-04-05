@@ -1,7 +1,7 @@
 package com.awbd.proiect.controllers;
 
-import com.awbd.proiect.domain.Product;
-import com.awbd.proiect.services.ProductService;
+import com.awbd.proiect.domain.Movie;
+import com.awbd.proiect.services.MovieService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -18,46 +18,46 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class ProductsControllerTest {
+public class MoviesControllerTest {
 
     @Mock
     Model model;
 
     @Mock
-    ProductService productService;
+    MovieService movieService;
 
-    ProductsController productsController;
+    MoviesController moviesController;
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
 
     @Before
     public void setUp() throws Exception {
-        productsController = new ProductsController(productService);
+        moviesController = new MoviesController(movieService);
     }
 
     @Captor
-    ArgumentCaptor<Product> argumentCaptor;
+    ArgumentCaptor<Movie> argumentCaptor;
 
 
     @Test
     public void showById() {
         Long id = 1l;
-        Product productTest = new Product();
-        productTest.setId(id);
+        Movie movieTest = new Movie();
+        movieTest.setId(id);
 
-        when(productService.findById(id)).thenReturn(productTest);
+        when(movieService.findById(id)).thenReturn(movieTest);
 
-        String viewName = productsController.showById(id.toString(), model);
+        String viewName = moviesController.showById(id.toString(), model);
         Assert.assertEquals("info", viewName);
-        verify(productService, times(1)).findById(id);
+        verify(movieService, times(1)).findById(id);
 
-        //ArgumentCaptor<Product> argumentCaptor = ArgumentCaptor.forClass(Product.class);
+        //ArgumentCaptor<Movie> argumentCaptor = ArgumentCaptor.forClass(Movie.class);
         verify(model, times(1))
-                .addAttribute(eq("product"), argumentCaptor.capture() );
+                .addAttribute(eq("movie"), argumentCaptor.capture() );
 
-        Product productArg = argumentCaptor.getValue();
-        Assert.assertEquals(productArg.getId(), productTest.getId() );
+        Movie movieArg = argumentCaptor.getValue();
+        Assert.assertEquals(movieArg.getId(), movieTest.getId() );
 
     }
 }

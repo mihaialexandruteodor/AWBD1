@@ -1,9 +1,9 @@
 package com.awbd.proiect.services;
 
 import com.awbd.proiect.domain.Category;
-import com.awbd.proiect.domain.Product;
+import com.awbd.proiect.domain.Movie;
 import com.awbd.proiect.exceptions.ResourceNotFoundException;
-import com.awbd.proiect.repositories.ProductRepository;
+import com.awbd.proiect.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,54 +13,54 @@ import java.util.Optional;
 
 
 @Service
-public class ProductServiceImpl implements ProductService {
+public class MovieServiceImpl implements MovieService {
 
-    ProductRepository productRepository;
+    MovieRepository movieRepository;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public MovieServiceImpl(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
     }
 
     @Override
-    public List<Product> findAll(){
-        List<Product> products = new LinkedList<>();
-        productRepository.findAll().iterator().forEachRemaining(products::add);
-        return products;
+    public List<Movie> findAll(){
+        List<Movie> movies = new LinkedList<>();
+        movieRepository.findAll().iterator().forEachRemaining(movies::add);
+        return movies;
     }
 
     @Override
-    public Product findById(Long l) {
-        Optional<Product> productOptional = productRepository.findById(l);
-        if (!productOptional.isPresent()) {
-            throw new ResourceNotFoundException("product " + l + " not found");
+    public Movie findById(Long l) {
+        Optional<Movie> movieOptional = movieRepository.findById(l);
+        if (!movieOptional.isPresent()) {
+            throw new ResourceNotFoundException("movie " + l + " not found");
         }
-        return productOptional.get();
+        return movieOptional.get();
     }
 
     @Override
-    public Product save(Product product) {
-        Product savedProduct = productRepository.save(product);
-        return savedProduct;
+    public Movie save(Movie movie) {
+        Movie savedMovie = movieRepository.save(movie);
+        return savedMovie;
     }
 
     @Override
     public void deleteById(Long id) {
-        Optional<Product> productOptional = productRepository.findById(id);
-        if (!productOptional.isPresent()) {
-            throw new RuntimeException("Product not found!");
+        Optional<Movie> movieOptional = movieRepository.findById(id);
+        if (!movieOptional.isPresent()) {
+            throw new RuntimeException("Movie not found!");
         }
-        Product product = productOptional.get();
+        Movie movie = movieOptional.get();
         List<Category> categories = new LinkedList<Category>();
-        product.getCategories().iterator().forEachRemaining(categories::add);
+        movie.getCategories().iterator().forEachRemaining(categories::add);
 
         for (Category category: categories
                 ) {
-            product.removeCategory(category);
+            movie.removeCategory(category);
         }
 
-        productRepository.save(product);
-        productRepository.deleteById(id);
+        movieRepository.save(movie);
+        movieRepository.deleteById(id);
 
     }
 

@@ -1,16 +1,12 @@
 package com.awbd.proiect.repositories;
 
-import com.awbd.proiect.domain.Product;
+import com.awbd.proiect.domain.Movie;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -26,20 +22,13 @@ import static org.junit.Assert.assertTrue;
 public class ProductRepositoryTest {
 
     @Autowired
-    private ProductRepository productRepository;
+    private MovieRepository movieRepository;
 
     @Test
-    public void findProducts() {
-        List<Product> products = productRepository.findBySeller(1L);
-        assertTrue(products.size() >= 2);
-        log.info("findBySeller ...");
-        products.forEach(product -> log.info(product.getName()));
-    }
-
-    @Test
-    public void findPage(){
-        Pageable firstPage = PageRequest.of(0, 2);
-        Page<Product> allProducts = productRepository.findAll(firstPage);
-        Assert.assertTrue(allProducts.getNumberOfElements() == 2);
+    public void findMovies() {
+        List<Movie> movies = movieRepository.movieRepository("In the Mood for Love");
+        assertTrue(movies.size() >= 2);
+        log.info("findByStudio ...");
+        movies.forEach(movie -> log.info(movie.getName()));
     }
 }

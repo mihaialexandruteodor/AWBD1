@@ -1,7 +1,7 @@
-package com.awbd.proiect;
+/*package com.awbd.proiect;
 
-import com.awbd.proiect.domain.Product;
-import com.awbd.proiect.services.ProductService;
+import com.awbd.proiect.domain.Movie;
+import com.awbd.proiect.services.MovieService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -23,13 +23,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ProductsControllerTest {
+public class MoviesControllerTest {
 
     @Autowired
     MockMvc mockMvc;
 
     @MockBean
-    ProductService productService;
+    MovieService movieService;
 
     @MockBean
     Model model;
@@ -38,17 +38,17 @@ public class ProductsControllerTest {
     @Test
     public void showByIdMvc() throws Exception {
         Long id = 1l;
-        Product productTest = new Product();
-        productTest.setId(id);
-        productTest.setName("test");
+        Movie movieTest = new Movie();
+        movieTest.setId(id);
+        movieTest.setName("test");
 
-        when(productService.findById(id)).thenReturn(productTest);
+        when(movieService.findById(id)).thenReturn(movieTest);
 
 
-        mockMvc.perform(get("/product/info/{id}", "1"))
+        mockMvc.perform(get("/movie/info/{id}", "1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("info"))
-                .andExpect(model().attribute("product", productTest));
+                .andExpect(model().attribute("movie", movieTest));
     }
 }
-
+*/

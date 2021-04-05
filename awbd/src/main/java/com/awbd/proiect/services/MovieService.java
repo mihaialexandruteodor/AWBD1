@@ -1,13 +1,13 @@
 package com.awbd.proiect.services;
 
-import com.awbd.proiect.domain.Product;
+import com.awbd.proiect.domain.Movie;
 
 import java.util.List;
 
-public interface ProductService {
-    List<Product> findAll();
-    Product findById(Long l);
-    Product save(Product product);
+public interface MovieService {
+    List<Movie> findAll();
+    Movie findById(Long l);
+    Movie save(Movie movie);
     void deleteById(Long id);
 
 }

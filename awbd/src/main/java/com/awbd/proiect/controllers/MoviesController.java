@@ -1,10 +1,10 @@
 package com.awbd.proiect.controllers;
 
 import com.awbd.proiect.domain.Category;
-import com.awbd.proiect.domain.Product;
+import com.awbd.proiect.domain.Movie;
 import com.awbd.proiect.services.CategoryService;
 import com.awbd.proiect.services.ImageService;
-import com.awbd.proiect.services.ProductService;
+import com.awbd.proiect.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +16,10 @@ import java.util.List;
 
 
 @Controller
-public class ProductsController {
+public class MoviesController {
 
     @Autowired
-    ProductService productService;
+    MovieService movieService;
 
     @Autowired
     CategoryService categoryService;
@@ -28,26 +28,18 @@ public class ProductsController {
     ImageService imageService;
 
     @Autowired
-    public ProductsController(ProductService productService) {
-        this.productService = productService;
+    public MoviesController(MovieService movieService) {
+        this.movieService = movieService;
     }
-
-    /*    @RequestMapping("/product/list")
-    public String productsList(Model model){
-        List<Product> products = productService.findAll();
-        model.addAttribute("products",products);
-
-        return "products";
-    }*/
 
     // SHOP REDIRECT AND CONTROLLER
 
 
     @RequestMapping("/shop")
     public ModelAndView shopList(){
-        ModelAndView modelAndView = new ModelAndView("products");
-        List<Product> products = productService.findAll();
-        modelAndView.addObject("products",products);
+        ModelAndView modelAndView = new ModelAndView("movies");
+        List<Movie> movies = movieService.findAll();
+        modelAndView.addObject("movies",movies);
         return modelAndView;
     }
 
@@ -62,43 +54,43 @@ public class ProductsController {
     // FROM THE LAB BELOW
 
 
-    @RequestMapping("/product/list")
-    public ModelAndView productsList(){
-        ModelAndView modelAndView = new ModelAndView("products");
-        List<Product> products = productService.findAll();
-        modelAndView.addObject("products",products);
+    @RequestMapping("/movie/list")
+    public ModelAndView moviesList(){
+        ModelAndView modelAndView = new ModelAndView("movies");
+        List<Movie> movies = movieService.findAll();
+        modelAndView.addObject("movies",movies);
         return modelAndView;
     }
 
-    @GetMapping("/product/info/{id}")
+    @GetMapping("/movie/info/{id}")
     public String showById(@PathVariable String id, Model model){
-        model.addAttribute("product",
-                productService.findById(Long.valueOf(id)));
+        model.addAttribute("movie",
+                movieService.findById(Long.valueOf(id)));
         return "info";
     }
 
-    @RequestMapping("/product/delete/{id}")
+    @RequestMapping("/movie/delete/{id}")
     public String deleteById(@PathVariable String id){
-        productService.deleteById(Long.valueOf(id));
-        return "redirect:/product/list";
+        movieService.deleteById(Long.valueOf(id));
+        return "redirect:/movie/list";
     }
 
-    @RequestMapping("/product/new")
+    @RequestMapping("/movie/new")
     public String newProduct(Model model) {
-        model.addAttribute("product", new Product());
+        model.addAttribute("movie", new Movie());
         List<Category> categoriesAll = categoryService.findAll();
 
         model.addAttribute("categoriesAll", categoriesAll );
-        return "productform";
+        return "movieform";
     }
 
-    @PostMapping("/product")
-    public String saveOrUpdate(@ModelAttribute Product product,
+    @PostMapping("/movie")
+    public String saveOrUpdate(@ModelAttribute Movie movie,
                                @RequestParam("imagefile") MultipartFile file){
-        Product savedProduct = productService.save(product);
-        imageService.saveImageFile(Long.valueOf(savedProduct.getId()), file);
-        //return "redirect:/product/info/" + savedProduct.getId();
-        return "redirect:/product/list" ;
+        Movie savedMovie = movieService.save(movie);
+        imageService.saveImageFile(Long.valueOf(savedMovie.getId()), file);
+        //return "redirect:/movie/info/" + savedProduct.getId();
+        return "redirect:/movie/list" ;
     }
 
 }

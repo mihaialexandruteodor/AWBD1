@@ -1,6 +1,6 @@
 package com.awbd.proiect.services;
 
-import com.awbd.proiect.domain.Product;
+import com.awbd.proiect.domain.Movie;
 import com.awbd.proiect.repositories.MovieRepository;
 import org.junit.Before;
 import org.junit.Rule;
@@ -17,34 +17,34 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 
-public class ProductServiceTest {
+public class MovieServiceTest {
 
-    MovieService productService;
+    MovieService movieService;
 
     @Mock
-    MovieRepository productRepository;
+    MovieRepository movieRepository;
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
 
     @Before
     public void setUp() throws Exception {
-        productService = new MovieServiceImpl(productRepository);
+        movieService = new MovieServiceImpl(movieRepository);
     }
 
     @Test
-    public void findProducts() {
-        List<Product> productsRet = new ArrayList<Product>();
-        Product product = new Product();
-        product.setCategories(null);
-        product.setId(4L);
-        product.setCode("TEST");
-        productsRet.add(product);
+    public void findMovies() {
+        List<Movie> moviesRet = new ArrayList<Movie>();
+        Movie movie = new Movie();
+        movie.setCategories(null);
+        movie.setId(4L);
+        //movie.setCode("TEST");
+        moviesRet.add(movie);
 
 
-        when(productRepository.findAll()).thenReturn(productsRet);
-        List<Product> products = productService.findAll();
-        assertEquals(products.size(), 1);
-        verify(productRepository, times(1)).findAll();
+        when(movieRepository.findAll()).thenReturn(moviesRet);
+        List<Movie> movies = movieService.findAll();
+        assertEquals(movies.size(), 1);
+        verify(movieRepository, times(1)).findAll();
     }
 }

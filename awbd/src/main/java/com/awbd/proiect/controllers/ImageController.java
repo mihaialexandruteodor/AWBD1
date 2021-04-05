@@ -1,9 +1,9 @@
 package com.awbd.proiect.controllers;
 
 import com.awbd.proiect.domain.Info;
-import com.awbd.proiect.domain.Product;
+import com.awbd.proiect.domain.Movie;
 import com.awbd.proiect.services.ImageService;
-import com.awbd.proiect.services.ProductService;
+import com.awbd.proiect.services.MovieService;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,20 +18,20 @@ import java.io.InputStream;
 @Controller
 public class ImageController {
 
-    private final ProductService productService;
+    private final MovieService movieService;
 
 
-    public ImageController(@Autowired ImageService imageService, @Autowired ProductService productService) {
-        this.productService = productService;
+    public ImageController(@Autowired ImageService imageService, @Autowired MovieService movieService) {
+        this.movieService = movieService;
     }
 
-    @GetMapping("product/getimage/{id}")
+    @GetMapping("movie/getimage/{id}")
     public void downloadImage(@PathVariable String id, HttpServletResponse response) throws IOException {
-        Product product = productService.findById(Long.valueOf(id));
-        if (product.getInfo() != null) {
-            Info info = product.getInfo();
+        Movie movie = movieService.findById(Long.valueOf(id));
+        if (movie.getInfo() != null) {
+            Info info = movie.getInfo();
 
-            if (product.getInfo().getImage() != null) {
+            if (movie.getInfo().getImage() != null) {
                 byte[] byteArray = new byte[info.getImage().length];
                 int i = 0;
                 for (Byte wrappedByte : info.getImage()) {
