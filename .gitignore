@@ -26,7 +26,6 @@ hs_err_pid*
 /laboratoare/SURSE_FINAL/LAB3/.idea/.name
 *.name
 *.project
-*.xml
 *.eclipse.core.resources.prefs
 *.eclipse.jdt.core.prefs
 *.eclipse.m2e.core.prefs
