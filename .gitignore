@@ -33,7 +33,7 @@ hs_err_pid*
 *.bin
 *.lock
 *.xml
-!POM.xml
+!pom.xml
 /awbd/.gradle/buildOutputCleanup/cache.properties
 /awbd/.gradle/6.8.3/gc.properties
 /awbd/.gradle/configuration-cache/gc.properties
