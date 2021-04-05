@@ -1,7 +1,7 @@
 package com.awbd.proiect.services;
 
 import com.awbd.proiect.domain.Product;
-import com.awbd.proiect.repositories.ProductRepository;
+import com.awbd.proiect.repositories.MovieRepository;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,17 +19,17 @@ import static org.mockito.Mockito.verify;
 
 public class ProductServiceTest {
 
-    ProductService productService;
+    MovieService productService;
 
     @Mock
-    ProductRepository productRepository;
+    MovieRepository productRepository;
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
 
     @Before
     public void setUp() throws Exception {
-        productService = new ProductServiceImpl(productRepository);
+        productService = new MovieServiceImpl(productRepository);
     }
 
     @Test
