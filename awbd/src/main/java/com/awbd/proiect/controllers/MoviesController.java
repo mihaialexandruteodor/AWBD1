@@ -32,18 +32,16 @@ public class MoviesController {
         this.movieService = movieService;
     }
 
-    // SHOP REDIRECT AND CONTROLLER
+    // SHOP REDIRECT
 
 
     @RequestMapping("/shop")
     public ModelAndView shopList(){
         ModelAndView modelAndView = new ModelAndView("movies");
-        List<Movie> movies = movieService.findAll();
-        modelAndView.addObject("movies",movies);
         return modelAndView;
     }
 
-    // ABOUT REDIRECT AND CONTROLLER
+    // ABOUT REDIRECT
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/about")
@@ -51,7 +49,7 @@ public class MoviesController {
         return "about.html";
     }
 
-    // FROM THE LAB BELOW
+    // CART
     @RequestMapping("/cart")
     public ModelAndView cartView() {
         ModelAndView modelAndView = new ModelAndView("cart");
