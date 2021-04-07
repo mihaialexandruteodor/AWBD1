@@ -52,7 +52,11 @@ public class MoviesController {
     }
 
     // FROM THE LAB BELOW
-
+    @RequestMapping("/cart")
+    public ModelAndView cartView() {
+        ModelAndView modelAndView = new ModelAndView("cart");
+        return modelAndView;
+    }
 
     @RequestMapping("/movie/list")
     public ModelAndView moviesList(){
