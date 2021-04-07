@@ -105,10 +105,10 @@ input {
 }
 </style>
 </head>
-<body>
+<body onload="firstItem()">
 
 <div id="myDIV" class="header">
-    <h2 style="margin:5px">Checkout</h2>
+    <h2 id="checkout" style="margin:5px">Checkout</h2>
     <input list="movies" name="movies" id="inputname" /></label>
     <datalist id="movies">
         <option value="Ong Bak">
@@ -125,7 +125,7 @@ input {
 
 
 <ul id="myUL">
-    <li>selected</li>
+
 </ul>
 
 <script>
@@ -158,6 +158,16 @@ list.addEventListener('click', function(ev) {
     ev.target.classList.toggle('checked');
   }
 }, false);
+
+function firstItem()
+{
+	var currentLocation = window.location + '';
+    var splitText = currentLocation.split("#");
+    var movieName = splitText[1];
+    document.getElementById('inputname').value = movieName;
+    newElement();
+
+}
 
 // Create a new list item when clicking on the "Add" button
 function newElement() {
