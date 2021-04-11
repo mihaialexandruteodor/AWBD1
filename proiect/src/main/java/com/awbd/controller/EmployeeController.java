@@ -3,7 +3,9 @@ package com.awbd.controller;
 import java.util.List;
 
 import com.awbd.model.Employee;
+import com.awbd.model.Team;
 import com.awbd.service.EmployeeService;
+import com.awbd.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -15,15 +17,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class EmployeeController {
+public class EmployeeAndTeamController {
 
 	@Autowired
 	private EmployeeService employeeService;
 	
 	// display list of employees
-	@GetMapping("/")
+	@GetMapping("/employee_page")
 	public String viewHomePage(Model model) {
-		return findPaginated(1, "firstName", "asc", model);		
+		return findPaginated(1, "firstName", "asc", model);
 	}
 	
 	@GetMapping("/showNewEmployeeForm")
@@ -70,7 +72,7 @@ public class EmployeeController {
 		
 		Page<Employee> page = employeeService.findPaginated(pageNo, pageSize, sortField, sortDir);
 		List<Employee> listEmployees = page.getContent();
-		
+
 		model.addAttribute("currentPage", pageNo);
 		model.addAttribute("totalPages", page.getTotalPages());
 		model.addAttribute("totalItems", page.getTotalElements());
@@ -80,6 +82,12 @@ public class EmployeeController {
 		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 		
 		model.addAttribute("listEmployees", listEmployees);
+
 		return "index";
 	}
+
+
+
+
+
 }
