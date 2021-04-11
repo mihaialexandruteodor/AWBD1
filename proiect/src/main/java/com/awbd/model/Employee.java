@@ -1,11 +1,6 @@
 package com.awbd.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "employees")
@@ -20,6 +15,9 @@ public class Employee {
 	
 	@Column(name = "last_name")
 	private String lastName;
+
+	@ManyToOne
+	private Team team;
 	
 	@Column(name = "email")
 	private String email;
