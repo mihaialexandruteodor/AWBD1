@@ -22,7 +22,7 @@ public class TeamController {
     }
 
     @RequestMapping("/teamPage")
-    public ModelAndView viewEmployeesPage( ) {
+    public ModelAndView viewTeamssPage( ) {
 
         ModelAndView mv = new ModelAndView("team_page");
         List<Team> teamList = teamService.getAllTeams();
@@ -76,19 +76,44 @@ public class TeamController {
         return "index";
     }
 
-   /* @PostMapping("/addEmployeeToTeam/{id,team}")
-    public String addEmployeeToTeam(@PathVariable(value = "id") long id, @ModelAttribute("team") Team team) {
 
-        // get employee from the service
+    @RequestMapping(value = "/addEmployeeToTeam")
+    public String addEmployeeToTeam(@RequestParam("id")int id,
+                           @RequestParam("team")Team team){
+       // teamService.saveTeam(team);
         Employee employee = employeeService.getEmployeeById(id);
-        teamService.addEmployeeToTeam(team,employee);
+        //teamService.addEmployeeToTeam(team,employee);
         return "redirect:/teamPage";
-    }*/
+    }
 
     @PostMapping("/saveTeam")
     public String saveTeam(@ModelAttribute("team") Team team) {
         // save employee to database
         teamService.saveTeam(team);
+        return "redirect:/teamPage";
+    }
+
+    @GetMapping("/showFormForUpdateTeam/{id}")
+    public String showFormForUpdate(@PathVariable ( value = "id") long id, Model model) {
+
+        // get employee from the service
+        Team team = teamService.getTeamById(id);
+
+        Page<Employee> page = employeeService.findPaginated(1, 5,"firstName", "asc");
+        List<Employee> listEmployees = page.getContent();
+
+        // set employee as a model attribute to pre-populate the form
+        model.addAttribute("team", team);
+        model.addAttribute("listEmployees", listEmployees);
+        model.addAttribute("listEmployeesFromTeam", team.getEmployeeList());
+        return "update_team";
+    }
+
+    @GetMapping("/deleteTeam/{id}")
+    public String deleteTeam(@PathVariable (value = "id") long id) {
+
+        // call delete team method
+        this.teamService.deleteTeamById(id);
         return "redirect:/teamPage";
     }
 }
