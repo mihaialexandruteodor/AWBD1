@@ -1,5 +1,6 @@
 package com.awbd.service;
 
+import com.awbd.model.Employee;
 import com.awbd.model.Team;
 import com.awbd.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,11 @@ public class TeamServiceImpl implements TeamService{
     @Override
     public void deleteTeamById(long id) {
         this.teamRepository.deleteById(id);
+    }
+
+    @Override
+    public void addEmployeeToTeam(Team team, Employee employee) {
+       team.addEmployee(employee);
     }
 
     @Override

@@ -14,6 +14,19 @@ public class Team {
     @Column(name = "team_name")
     private String teamName;
 
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
+
+    public void addEmployee(Employee employee)
+    {
+        this.employeeList.add(employee);
+    }
+
     @OneToMany(mappedBy = "team")
     private List<Employee> employeeList;
 
@@ -23,10 +36,10 @@ public class Team {
     public void setId(long id) {
         this.id = id;
     }
-    public String getName() {
+    public String getTeamName() {
         return teamName;
     }
-    public void setName(String name) {
+    public void setTeamName(String name) {
         this.teamName = name;
     }
 

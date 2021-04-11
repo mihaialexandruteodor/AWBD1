@@ -1,5 +1,6 @@
 package com.awbd.service;
 
+import com.awbd.model.Employee;
 import com.awbd.model.Team;
 import org.springframework.data.domain.Page;
 
@@ -10,5 +11,6 @@ public interface TeamService {
     void saveTeam(Team team);
     Team getTeamById(long id);
     void deleteTeamById(long id);
+    void addEmployeeToTeam(Team team, Employee employee) ;
     Page<Team> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 }
