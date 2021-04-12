@@ -77,13 +77,13 @@ public class TeamController {
     }
 
 
-    @RequestMapping(value = "/addEmployeeToTeam")
-    public String addEmployeeToTeam(@RequestParam("id")int id,
-                           @RequestParam("team")Team team){
-       // teamService.saveTeam(team);
+    //@RequestMapping(value = "/addEmployeeToTeam/{id}{team}")
+    @RequestMapping(value = "/addEmployeeToTeam/{id}/{team}")
+    public String addEmployeeToTeam(@PathVariable (value = "id") long id, @PathVariable("team") long team){
+       // Team teamObj = teamService.getTeamById(team);
         Employee employee = employeeService.getEmployeeById(id);
-        //teamService.addEmployeeToTeam(team,employee);
-        return "redirect:/teamPage";
+        //teamService.addEmployeeToTeam(teamObj,employee);
+        return "redirect:/showFormForUpdateTeam/{team}";
     }
 
     @PostMapping("/saveTeam")

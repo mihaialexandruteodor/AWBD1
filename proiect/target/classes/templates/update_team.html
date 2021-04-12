@@ -19,7 +19,10 @@
         <input type="text" th:field="*{teamName}"
                placeholder="Team Name" class="form-control mb-4 col-4">
 
+        <button type="submit" class="btn btn-info col-2"> Update Team</button>
 
+    <hr>
+    <br>
         <h2>Current Team Members</h2>
         <table border="1" class = "table table-striped table-responsive-md">
             <thead>
@@ -82,10 +85,8 @@
             </tbody>
         </table>
 
-        <button type="submit" class="btn btn-info col-2"> Update Team</button>
-    </form>
 
-    <hr>
+    </form>
 
     <a th:href = "@{/teamPage}"> Back to previous page</a>
 </div>
