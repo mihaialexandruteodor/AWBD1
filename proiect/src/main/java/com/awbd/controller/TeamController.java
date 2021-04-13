@@ -66,6 +66,12 @@ public class TeamController {
         Page<Team> page = teamService.findPaginated(pageNo, pageSize, sortField, sortDir);
         List<Team> listTeams = page.getContent();
 
+        List<Set<Employee>> employeeSets = new ArrayList<>();
+
+        for(Team team : listTeams)
+            employeeSets.add(team.getEmployeeList());
+
+
         model.addObject("currentPage", pageNo);
         model.addObject("totalPages", page.getTotalPages());
         model.addObject("totalItems", page.getTotalElements());
@@ -75,6 +81,7 @@ public class TeamController {
         model.addObject("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 
         model.addObject("listTeams", listTeams);
+        model.addObject("employeeSets", employeeSets);
         return "index";
     }
 

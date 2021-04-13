@@ -15,8 +15,7 @@ public class Team {
     @Column(name = "team_name")
     private String teamName;
 
-    @OneToMany(mappedBy = "team", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
     private Set<Employee> employeeList;
 
     public void addEmployee(Employee employee)
@@ -27,7 +26,15 @@ public class Team {
     public void removeEmployee(Employee employee)
     {
         this.employeeList.remove(employee);
+        employee.setTeam(null);
     }
+
+    public void removeAllEmployees()
+    {
+        for(Employee employee : employeeList)
+            removeEmployee(employee);
+    }
+
 
     public void setId(long id) {
         this.teamid = id;
