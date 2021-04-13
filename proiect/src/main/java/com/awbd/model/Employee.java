@@ -16,7 +16,8 @@ public class Employee {
 	@Column(name = "last_name")
 	private String lastName;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="teamid")
 	private Team team;
 	
 	@Column(name = "email")
@@ -45,4 +46,6 @@ public class Employee {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public Team getTeam() { return team; }
+	public void setTeam(Team team) { this.team = team; }
 }

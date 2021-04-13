@@ -2,6 +2,7 @@ package com.awbd.service;
 
 import com.awbd.model.Employee;
 import com.awbd.model.Team;
+import com.awbd.repository.EmployeeRepository;
 import com.awbd.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,9 @@ public class TeamServiceImpl implements TeamService{
 
     @Autowired
     private TeamRepository teamRepository;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     @Override
     public List<Team> getAllTeams() {return teamRepository.findAll();}
@@ -44,7 +48,18 @@ public class TeamServiceImpl implements TeamService{
 
     @Override
     public void addEmployeeToTeam(Team team, Employee employee) {
-       team.addEmployee(employee);
+        team.addEmployee(employee);
+        employee.setTeam(team);
+        this.teamRepository.save(team);
+        this.employeeRepository.save(employee);
+    }
+
+    @Override
+    public void removeEmployeeFromTeam(Team team, Employee employee) {
+        team.removeEmployee(employee);
+        employee.setTeam(null);
+        this.teamRepository.save(team);
+        this.employeeRepository.save(employee);
     }
 
     @Override

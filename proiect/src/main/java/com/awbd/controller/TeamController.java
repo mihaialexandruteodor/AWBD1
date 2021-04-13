@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class TeamController {
@@ -77,20 +79,28 @@ public class TeamController {
     }
 
 
-    //@RequestMapping(value = "/addEmployeeToTeam/{id}{team}")
+
     @RequestMapping(value = "/addEmployeeToTeam/{id}/{team}")
     public String addEmployeeToTeam(@PathVariable (value = "id") long id, @PathVariable("team") long team){
-       // Team teamObj = teamService.getTeamById(team);
+        Team teamObj = teamService.getTeamById(team);
         Employee employee = employeeService.getEmployeeById(id);
-        //teamService.addEmployeeToTeam(teamObj,employee);
-        return "redirect:/showFormForUpdateTeam/{team}";
+        teamService.addEmployeeToTeam(teamObj,employee);
+        return "redirect:/showFormForUpdateTeam/"+team;
+    }
+
+    @RequestMapping(value = "/removeEmployeeFromTeam/{id}/{team}")
+    public String removeEmployeeFromTeam(@PathVariable (value = "id") long id, @PathVariable("team") long team){
+        Team teamObj = teamService.getTeamById(team);
+        Employee employee = employeeService.getEmployeeById(id);
+        teamService.removeEmployeeFromTeam(teamObj,employee);
+        return "redirect:/showFormForUpdateTeam/"+team;
     }
 
     @PostMapping("/saveTeam")
     public String saveTeam(@ModelAttribute("team") Team team) {
         // save employee to database
         teamService.saveTeam(team);
-        return "redirect:/teamPage";
+        return "redirect:/showFormForUpdateTeam/"+team.getId();
     }
 
     @GetMapping("/showFormForUpdateTeam/{id}")
@@ -100,12 +110,15 @@ public class TeamController {
         Team team = teamService.getTeamById(id);
 
         Page<Employee> page = employeeService.findPaginated(1, 5,"firstName", "asc");
-        List<Employee> listEmployees = page.getContent();
+        List<Employee> listEmployees = new ArrayList<Employee>(page.getContent());
+        Set<Employee> teamEmployees = team.getEmployeeList();
+
+        listEmployees.removeIf(teamEmployees::contains);       //so the same employee isn't added twice
 
         // set employee as a model attribute to pre-populate the form
         model.addAttribute("team", team);
         model.addAttribute("listEmployees", listEmployees);
-        model.addAttribute("listEmployeesFromTeam", team.getEmployeeList());
+        model.addAttribute("listEmployeesFromTeam", teamEmployees);
         return "update_team";
     }
 

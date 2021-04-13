@@ -12,5 +12,6 @@ public interface TeamService {
     Team getTeamById(long id);
     void deleteTeamById(long id);
     void addEmployeeToTeam(Team team, Employee employee) ;
+    void removeEmployeeFromTeam(Team team, Employee employee) ;
     Page<Team> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 }

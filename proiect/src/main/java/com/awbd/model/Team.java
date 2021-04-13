@@ -2,6 +2,7 @@ package com.awbd.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "team")
@@ -9,38 +10,38 @@ public class Team {
 
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    private long id;
+    private long teamid;
 
     @Column(name = "team_name")
     private String teamName;
 
-    public List<Employee> getEmployeeList() {
-        return employeeList;
-    }
-
-    public void setEmployeeList(List<Employee> employeeList) {
-        this.employeeList = employeeList;
-    }
+    @OneToMany(mappedBy = "team", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Set<Employee> employeeList;
 
     public void addEmployee(Employee employee)
     {
         this.employeeList.add(employee);
     }
 
-    @OneToMany(mappedBy = "team")
-    private List<Employee> employeeList;
+    public void removeEmployee(Employee employee)
+    {
+        this.employeeList.remove(employee);
+    }
 
-    public long getId() {
-        return id;
-    }
     public void setId(long id) {
-        this.id = id;
+        this.teamid = id;
     }
+    public long getId() { return teamid; }
     public String getTeamName() {
         return teamName;
     }
     public void setTeamName(String name) {
         this.teamName = name;
+    }
+    public Set<Employee> getEmployeeList() { return employeeList; }
+    public void setEmployeeList(Set<Employee> employeeList) {
+        this.employeeList = employeeList;
     }
 
 }
