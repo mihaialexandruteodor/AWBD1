@@ -18,6 +18,11 @@ import java.util.Set;
 @Controller
 public class TeamController {
 
+    @Autowired
+    private EmployeeService employeeService;
+
+    @Autowired
+    private TeamService teamService;
 
     public String loadTeamPageData(ModelAndView model) {
         return this.findPaginated(1, "teamName", "asc", model);
@@ -32,12 +37,6 @@ public class TeamController {
         loadTeamPageData(mv);
         return mv;
     }
-
-    @Autowired
-    private EmployeeService employeeService;
-
-    @Autowired
-    private TeamService teamService;
 
 
     @GetMapping("/showNewTeamForm")

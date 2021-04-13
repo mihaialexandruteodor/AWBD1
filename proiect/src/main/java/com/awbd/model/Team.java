@@ -1,7 +1,6 @@
 package com.awbd.model;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,6 +16,14 @@ public class Team {
 
     @OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
     private Set<Employee> employeeList;
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "Team_Project",
+            joinColumns = { @JoinColumn(name = "teamid") },
+            inverseJoinColumns = { @JoinColumn(name = "projid") }
+    )
+    private Set<Project> projects;
 
     public void addEmployee(Employee employee)
     {
@@ -35,6 +42,22 @@ public class Team {
             removeEmployee(employee);
     }
 
+    public void addProject(Project project)
+    {
+        this.projects.add(project);
+    }
+
+    public void removeProject(Project project)
+    {
+        this.projects.remove(project);
+    }
+
+    public void removeAllProjects()
+    {
+        for(Project project : projects)
+            removeProject(project);
+    }
+
 
     public void setId(long id) {
         this.teamid = id;
@@ -50,5 +73,7 @@ public class Team {
     public void setEmployeeList(Set<Employee> employeeList) {
         this.employeeList = employeeList;
     }
+    public Set<Project> getProjects() { return projects; }
+    public void setProjects(Set<Project> projects) { this.projects = projects; }
 
 }
