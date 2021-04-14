@@ -3,9 +3,7 @@ package com.awbd.controller;
 import java.util.List;
 
 import com.awbd.model.Employee;
-import com.awbd.model.Team;
 import com.awbd.service.EmployeeService;
-import com.awbd.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -18,8 +16,6 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
-	
-	// display list of employees
 
 	public String loadEmployeesPageData(ModelAndView model) {
 		return findPaginated(1, "firstName", "asc", model);

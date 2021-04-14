@@ -58,7 +58,6 @@ public class Team {
             removeProject(project);
     }
 
-
     public void setId(long id) {
         this.teamid = id;
     }
