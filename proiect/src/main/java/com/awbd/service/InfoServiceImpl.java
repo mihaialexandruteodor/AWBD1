@@ -1,6 +1,7 @@
 package com.awbd.service;
 
 import com.awbd.model.Info;
+import com.awbd.model.Project;
 import com.awbd.repository.InfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -46,5 +47,17 @@ public class InfoServiceImpl implements InfoService{
 
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         return this.infoRepository.findAll(pageable);
+    }
+
+    @Override
+    public void ChangeProjectInfo(Info info, Project project) {
+        info.setInfoProject(project);
+        this.infoRepository.save(info);
+    }
+
+    @Override
+    public void RemoveProjectInfo(Info info) {
+        info.setInfoProject(null);
+        this.infoRepository.save(info);
     }
 }

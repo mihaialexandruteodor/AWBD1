@@ -22,8 +22,8 @@
             <thead>
             <tr>
                 <th>
-                    <a th:href="@{'/pageI/' + ${currentPage} + '?sortField=projName&sortDir=' + ${reverseSortDir}}">
-                        Project Name</a>
+                    <a th:href="@{'/pageI/' + ${currentPage} + '?sortField=infoid&sortDir=' + ${reverseSortDir}}">
+                        Info Name</a>
                 </th>
                 <th>
                     <a >
@@ -31,11 +31,11 @@
                 </th>
             <tbody>
             <tr th:each="Info,iter  : ${listInfos}">
-                <td th:text="${Info.projName}"></td>
+                <td th:text="${Info.infoProject != null} ? ${Info.infoProject.projName} : 'This info has no project associated'"></td>
 
 
-                <td> <a th:href="@{/showFormForUpdateInfo/{id}(id=${Info.projid})}" class="btn btn-primary">Update</a>
-                    <a th:href="@{/deleteInfo/{id}(id=${Info.projid})}" class="btn btn-danger">Delete</a>
+                <td> <a th:href="@{/showFormForUpdateInfo/{id}(id=${Info.infoid})}" class="btn btn-primary">Update</a>
+                    <a th:href="@{/deleteInfo/{id}(id=${Info.infoid})}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
             </tbody>

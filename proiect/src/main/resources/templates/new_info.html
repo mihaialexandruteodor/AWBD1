@@ -16,8 +16,6 @@
 
     <form action="#" th:action="@{/saveInfo}" th:object="${info}"
           method="POST">
-        <!-- Add hidden form field to handle update -->
-        <input type="hidden" th:field="*{Infoid}" />
 
         <textarea th:field="*{description}"  rows="10" cols="60">Type info here</textarea>
         <br>
@@ -31,16 +29,16 @@
             <thead>
             <tr>
                 <th>
-                    <a th:href="@{'/page/' + ${currentPage} + '?sortField=teamName&sortDir=' + ${reverseSortDir}}">
+                    <a th:href="@{'/pageI/' + ${currentPage} + '?sortField=infoid&sortDir=' + ${reverseSortDir}}">
                         Project Name</a>
                 </th>
                 <th> Actions </th>
             </tr>
             </thead>
             <tbody>
-            <td th:text="${info.InfoProject != null} ? ${info.InfoProject.projName} : 'This info has no project associated'"></td>
-            <td th:if="${info.InfoProject != null}">
-                <a th:href="@{/removeProject/{Infoid}(Infoid=${info.Infoid})}" class="btn btn-danger">Remove Project Info</a>
+            <td th:text="${info.infoProject != null} ? ${info.infoProject.projName} : 'This info has no project associated'"></td>
+            <td th:if="${info.infoProject != null}">
+                <a th:href="@{/removeProjectInfo/{Infoid}(Infoid=${info.infoid})}" class="btn btn-danger">Remove Project Info</a>
             </td>
 
             </tbody>
@@ -51,7 +49,7 @@
             <thead>
             <tr>
                 <th>
-                    <a th:href="@{'/pageI/' + ${currentPage} + '?sortField=teamName&sortDir=' + ${reverseSortDir}}">
+                    <a th:href="@{'/pageI/' + ${currentPage} + '?sortField=infoid&sortDir=' + ${reverseSortDir}}">
                         Project Name</a>
                 </th>
                 <th> Actions </th>
@@ -61,7 +59,7 @@
             <tr th:each="project : ${listProjects}">
                 <td th:text="${project.projName}"></td>
                 <td>
-                    <a th:href="@{/changeProject/{projid}/{Infoid}(projid=${project.projid}, Infoid=${info.Infoid})}" class="btn btn-primary">Set Project Info</a>
+                    <a th:href="@{/changeProjectInfo/{projid}/{Infoid}(projid=${project.projid}, Infoid=${info.infoid})}" class="btn btn-primary">Set Project Info</a>
                 </td>
             </tr>
             </tbody>
@@ -70,7 +68,7 @@
 
     </form>
 
-    <a th:href = "@{/InfoPage}"> Back to previous page</a>
+    <a th:href = "@{/infoPage}"> Back to previous page</a>
 </div>
 
 <div th:if = "${totalPages > 1}">
@@ -80,17 +78,17 @@
         </div>
         <div class = "col-sm-1">
 					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
-						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<a th:if="${currentPage != i}" th:href="@{'/pageI/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
 						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
 					</span>
         </div>
         <div class = "col-sm-1">
-            <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+            <a th:if="${currentPage < totalPages}" th:href="@{'/pageI/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
             <span th:unless="${currentPage < totalPages}">Next</span>
         </div>
 
         <div class="col-sm-1">
-            <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+            <a th:if="${currentPage < totalPages}" th:href="@{'/pageI/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
             <span th:unless="${currentPage < totalPages}">Last</span>
         </div>
     </div>
