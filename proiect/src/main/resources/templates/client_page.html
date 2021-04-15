@@ -39,7 +39,7 @@
         <tr th:each="client : ${listClients}">
             <td th:text="${client.firstName}"></td>
             <td th:text="${client.lastName}"></td>
-            <td th:text="${client.clientProject.projName}"></td>
+            <td th:text="${client.clientProject != null} ? ${client.clientProject.projName} : 'Client has no project'"></td>
             <td> <a th:href="@{/showFormForUpdateClient/{id}(id=${client.clientid})}" class="btn btn-primary">Update</a>
                 <a th:href="@{/deleteClient/{id}(id=${client.clientid})}" class="btn btn-danger">Delete</a>
             </td>
