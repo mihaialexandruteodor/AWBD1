@@ -1,7 +1,6 @@
 package com.awbd.controller;
 
 import com.awbd.model.Client;
-import com.awbd.model.Employee;
 import com.awbd.model.Project;
 import com.awbd.service.ClientService;
 import com.awbd.service.ProjectService;
@@ -14,13 +13,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class ClientController {
 
     @Autowired
     private ClientService clientService;
+
+    @Autowired
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
+    }
 
     @Autowired
     private ProjectService projectService;
