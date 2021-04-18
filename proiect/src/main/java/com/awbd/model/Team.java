@@ -8,7 +8,7 @@ import java.util.Set;
 public class Team {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy =  GenerationType.SEQUENCE)
     private long teamid;
 
     @Column(name = "team_name")

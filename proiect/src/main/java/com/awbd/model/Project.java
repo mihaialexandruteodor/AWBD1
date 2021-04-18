@@ -8,7 +8,7 @@ import java.util.Set;
 public class Project {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy =  GenerationType.SEQUENCE)
     private long projid;
 
     @Column(name = "proj_name")
