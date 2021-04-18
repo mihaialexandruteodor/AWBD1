@@ -17,6 +17,11 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
 
+	@Autowired
+	public EmployeeController(EmployeeService employeeService) {
+		this.employeeService = employeeService;
+	}
+
 	public String loadEmployeesPageData(ModelAndView model) {
 		return findPaginated(1, "firstName", "asc", model);
 	}
@@ -37,6 +42,13 @@ public class EmployeeController {
 		Employee employee = new Employee();
 		model.addAttribute("employee", employee);
 		return "new_employee";
+	}
+
+	@GetMapping("/employee/info/{id}")
+	public String showById(@PathVariable String id, Model model){
+		model.addAttribute("employee",
+				employeeService.getEmployeeById(Long.valueOf(id)));
+		return "update_employee";
 	}
 	
 	@PostMapping("/saveEmployee")
