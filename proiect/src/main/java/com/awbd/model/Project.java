@@ -3,6 +3,8 @@ package com.awbd.model;
 import javax.persistence.*;
 import java.util.Set;
 
+import static org.hibernate.query.criteria.internal.ValueHandlerFactory.isNumeric;
+
 @Entity
 @Table(name = "project")
 public class Project {
@@ -42,7 +44,10 @@ public class Project {
         return budget;
     }
     public void setBudget(String budget) {
-        this.budget = budget;
+        if(isNumeric(budget))
+             this.budget = budget;
+        else
+            throw new RuntimeException("not a number");
     }
     public Set<Team> getTeams() {
         return teams;
