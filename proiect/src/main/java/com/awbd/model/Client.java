@@ -20,6 +20,10 @@ public class Client {
     @JoinColumn(name = "projid")
     private Project clientProject;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="organisationid")
+    private Organisation organisation;
+
     public long getClientid() { return clientid; }
     public void setClientid(long clientid) { this.clientid = clientid; }
     public String getFirstName() { return firstName; }
@@ -28,4 +32,6 @@ public class Client {
     public void setLastName(String lastName) { this.lastName = lastName; }
     public Project getClientProject() { return clientProject; }
     public void setClientProject(Project clientProject) { this.clientProject = clientProject; }
+    public Organisation getOrganisation() { return organisation; }
+    public void setOrganisation(Organisation organisation) { this.organisation = organisation; }
 }
