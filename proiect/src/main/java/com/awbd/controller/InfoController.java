@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,14 +56,14 @@ public class InfoController {
     }
 
     @PostMapping("/saveInfo")
-    public String saveInfo(@ModelAttribute("info") Info info) {
+    public String saveInfo(@Valid @ModelAttribute("info") Info info) {
         // save info to database
         infoService.saveInfo(info);
         return "redirect:/infoPage";
     }
 
     @GetMapping("/showFormForUpdateInfo/{id}")
-    public String showFormForUpdate(@PathVariable( value = "id") long id, Model model) {
+    public String showFormForUpdate(@Valid @PathVariable( value = "id") long id, Model model) {
 
         // get info from the service
         Info info = infoService.getInfoById(id);
@@ -80,7 +81,7 @@ public class InfoController {
     }
 
     @GetMapping("/deleteInfo/{id}")
-    public String deleteInfo(@PathVariable (value = "id") long id) {
+    public String deleteInfo(@Valid @PathVariable (value = "id") long id) {
 
         // call delete info method
         this.infoService.deleteInfoById(id);
@@ -89,9 +90,9 @@ public class InfoController {
 
 
     @GetMapping("/pageI/{pageNo}")
-    public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
-                                                            @RequestParam("sortField") String sortField,
-                                                            @RequestParam("sortDir") String sortDir,
+    public String findPaginated(@Valid @PathVariable(value = "pageNo") int pageNo,
+                                @Valid @RequestParam("sortField") String sortField,
+                                @Valid @RequestParam("sortDir") String sortDir,
                                 ModelAndView model) {
         int pageSize = 5;
 
@@ -116,7 +117,7 @@ public class InfoController {
     }
 
     @RequestMapping("/changeProjectInfo/{projid}/{infoid}")
-    public String changeProject(@PathVariable (value = "projid") long projid, @PathVariable("infoid") long infoid){
+    public String changeProject(@Valid @PathVariable (value = "projid") long projid, @Valid @PathVariable("infoid") long infoid){
         Project project = projectService.getProjectById(projid);
         Info info = infoService.getInfoById(infoid);
         infoService.ChangeProjectInfo(info,project);
@@ -124,7 +125,7 @@ public class InfoController {
     }
 
     @RequestMapping("/removeProjectInfo/{infoid}")
-    public String removeProject(@PathVariable("infoid") long infoid){
+    public String removeProject(@Valid @PathVariable("infoid") long infoid){
         Info info = infoService.getInfoById(infoid);
         infoService.RemoveProjectInfo(info);
         return "redirect:/showFormForUpdateInfo/"+infoid;

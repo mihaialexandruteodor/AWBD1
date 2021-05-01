@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,14 +52,14 @@ public class ClientController {
     }
 
     @PostMapping("/saveClient")
-    public String saveClient(@ModelAttribute("client") Client client) {
+    public String saveClient(@Valid @ModelAttribute("client") Client client) {
         // save client to database
         clientService.saveClient(client);
         return "redirect:/clientPage";
     }
 
     @GetMapping("/showFormForUpdateClient/{id}")
-    public String showFormForUpdate(@PathVariable( value = "id") long id, Model model) {
+    public String showFormForUpdate(@Valid @PathVariable( value = "id") long id, Model model) {
 
         // get client from the service
         Client client = clientService.getClientById(id);
@@ -80,7 +81,7 @@ public class ClientController {
     }
 
     @GetMapping("/deleteClient/{id}")
-    public String deleteClient(@PathVariable (value = "id") long id) {
+    public String deleteClient(@Valid @PathVariable (value = "id") long id) {
 
         // call delete client method 
         this.clientService.deleteClientById(id);
@@ -89,9 +90,9 @@ public class ClientController {
 
 
     @GetMapping("/pageC/{pageNo}")
-    public String findPaginated(@PathVariable (value = "pageNo") int pageNo,
-                                @RequestParam("sortField") String sortField,
-                                @RequestParam("sortDir") String sortDir,
+    public String findPaginated(@Valid @PathVariable (value = "pageNo") int pageNo,
+                                @Valid @RequestParam("sortField") String sortField,
+                                @Valid @RequestParam("sortDir") String sortDir,
                                 ModelAndView model) {
         int pageSize = 5;
 
@@ -113,7 +114,7 @@ public class ClientController {
     }
 
     @RequestMapping("/changeProject/{projid}/{clientid}")
-    public String changeProject(@PathVariable (value = "projid") long projid, @PathVariable("clientid") long clientid){
+    public String changeProject(@Valid @PathVariable (value = "projid") long projid, @Valid @PathVariable("clientid") long clientid){
         Project project = projectService.getProjectById(projid);
         Client client = clientService.getClientById(clientid);
         clientService.ChangeProject(client,project);
@@ -121,7 +122,7 @@ public class ClientController {
     }
 
     @RequestMapping("/removeProject/{clientid}")
-    public String removeProject(@PathVariable("clientid") long clientid){
+    public String removeProject(@Valid @PathVariable("clientid") long clientid){
         Client client = clientService.getClientById(clientid);
         clientService.RemoveProject(client);
         return "redirect:/showFormForUpdateClient/"+clientid;

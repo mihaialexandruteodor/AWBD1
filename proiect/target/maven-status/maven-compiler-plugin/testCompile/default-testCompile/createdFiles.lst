@@ -1,1 +1,6 @@
 com\awbd\EmployeeManagerAppTests.class
+com\awbd\repositories\TeamRepositoryTest.class
+com\awbd\services\EmployeeServiceTest.class
+com\awbd\controllers\ClientControllerTest.class
+com\awbd\repositories\ProjectRepositoryTest.class
+com\awbd\controllers\EmployeeControllerTest.class

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -55,9 +56,9 @@ public class ProjectController {
 
 
     @GetMapping("/pageP/{pageNo}")
-    public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
-                                @RequestParam("sortField") String sortField,
-                                @RequestParam("sortDir") String sortDir,
+    public String findPaginated(@Valid @PathVariable(value = "pageNo") int pageNo,
+                                @Valid @RequestParam("sortField") String sortField,
+                                @Valid @RequestParam("sortDir") String sortDir,
                                 ModelAndView model) {
         int pageSize = 5;
 
@@ -87,7 +88,7 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/addTeamToProject/{teamid}/{projectid}")
-    public String addTeamToProject(@PathVariable (value = "teamid") long teamid, @PathVariable("projectid") long projectid){
+    public String addTeamToProject(@Valid @PathVariable (value = "teamid") long teamid, @Valid @PathVariable("projectid") long projectid){
         Team teamObj = teamService.getTeamById(teamid);
         Project project = projectService.getProjectById(projectid);
         projectService.addTeamToProject(project,teamObj);
@@ -95,7 +96,7 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/removeTeamFromProject/{teamid}/{projectid}")
-    public String removeTeamFromProject(@PathVariable (value = "teamid") long teamid, @PathVariable("projectid") long projectid){
+    public String removeTeamFromProject(@Valid @PathVariable (value = "teamid") long teamid, @Valid @PathVariable("projectid") long projectid){
         Team teamObj = teamService.getTeamById(teamid);
         Project project = projectService.getProjectById(projectid);
         projectService.removeTeamFromProject(project,teamObj);
@@ -103,14 +104,14 @@ public class ProjectController {
     }
 
     @PostMapping("/saveProj")
-    public String saveProj(@ModelAttribute("project") Project project) {
+    public String saveProj(@Valid @ModelAttribute("project") Project project) {
         // save project to database
         projectService.saveProject(project);
         return "redirect:/showFormForUpdateProj/"+project.getProjid();
     }
 
     @GetMapping("/showFormForUpdateProj/{id}")
-    public String showFormForUpdate(@PathVariable ( value = "id") long id, Model model) {
+    public String showFormForUpdate(@Valid @PathVariable ( value = "id") long id, Model model) {
 
         // get proj from the service
         Project project = projectService.getProjectById(id);
@@ -129,7 +130,7 @@ public class ProjectController {
     }
 
     @GetMapping("/deleteProj/{id}")
-    public String deleteProj(@PathVariable (value = "id") long id) {
+    public String deleteProj(@Valid @PathVariable (value = "id") long id) {
 
         // call delete team method
         this.projectService.deleteProjectById(id);

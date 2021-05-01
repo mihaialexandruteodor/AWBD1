@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -52,21 +53,21 @@ public class OrganisationController {
     }
 
     @PostMapping("/saveOrganisation")
-    public String saveOrganisation(@ModelAttribute("organisation") Organisation organisation) {
+    public String saveOrganisation(@Valid @ModelAttribute("organisation") Organisation organisation) {
         // save organisation to database
         organisationService.saveOrganisation(organisation);
         return "redirect:/organisationPage";
     }
 
     @GetMapping("/deleteOrganisation/{id}")
-    public String deleteOrganisation(@PathVariable (value = "id") long id) {
+    public String deleteOrganisation(@Valid @PathVariable (value = "id") long id) {
 
         organisationService.deleteOrganisationById(id);
         return "redirect:/organisationPage";
     }
 
     @GetMapping("/showFormForUpdateOrganisation/{id}")
-    public String showFormForUpdate(@PathVariable( value = "id") long id, Model model) {
+    public String showFormForUpdate(@Valid @PathVariable( value = "id") long id, Model model) {
 
         // get organisation from the service
         Organisation organisation = organisationService.getOrganisationById(id);
@@ -84,9 +85,9 @@ public class OrganisationController {
     }
 
     @GetMapping("/pageO/{pageNo}")
-    public String findPaginated(@PathVariable (value = "pageNo") int pageNo,
-                                @RequestParam("sortField") String sortField,
-                                @RequestParam("sortDir") String sortDir,
+    public String findPaginated(@Valid @PathVariable (value = "pageNo") int pageNo,
+                                @Valid @RequestParam("sortField") String sortField,
+                                @Valid @RequestParam("sortDir") String sortDir,
                                 ModelAndView model) {
         int pageSize = 5;
 
@@ -115,7 +116,7 @@ public class OrganisationController {
     }
 
     @RequestMapping(value = "/addClientToOrganisation/{id}/{organisation}")
-    public String addEmployeeToTeam(@PathVariable (value = "id") long id, @PathVariable("organisation") long organisation){
+    public String addEmployeeToTeam(@Valid @PathVariable (value = "id") long id, @Valid @PathVariable("organisation") long organisation){
         Client clientObj = clientService.getClientById(id);
         Organisation organisationObj = organisationService.getOrganisationById(organisation);
         organisationService.addClient(organisationObj, clientObj);
@@ -123,7 +124,7 @@ public class OrganisationController {
     }
 
     @RequestMapping(value = "/removeClientFromOrganisation/{id}/{organisation}")
-    public String removeClientFromOrganisation(@PathVariable (value = "id") long id, @PathVariable("organisation") long organisation){
+    public String removeClientFromOrganisation(@Valid @PathVariable (value = "id") long id, @Valid @PathVariable("organisation") long organisation){
         Client clientObj = clientService.getClientById(id);
         Organisation organisationObj = organisationService.getOrganisationById(organisation);
         organisationService.removeClient(organisationObj,clientObj);

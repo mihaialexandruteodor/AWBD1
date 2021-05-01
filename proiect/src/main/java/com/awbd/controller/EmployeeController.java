@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+
 @Controller
 public class EmployeeController {
 
@@ -45,21 +47,21 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/employee/info/{id}")
-	public String showById(@PathVariable String id, Model model){
+	public String showById(@Valid @PathVariable String id, Model model){
 		model.addAttribute("employee",
 				employeeService.getEmployeeById(Long.valueOf(id)));
 		return "update_employee";
 	}
 	
 	@PostMapping("/saveEmployee")
-	public String saveEmployee(@ModelAttribute("employee") Employee employee) {
+	public String saveEmployee(@Valid @ModelAttribute("employee") Employee employee) {
 		// save employee to database
 		employeeService.saveEmployee(employee);
 		return "redirect:/employeePage";
 	}
 	
 	@GetMapping("/showFormForUpdate/{id}")
-	public String showFormForUpdate(@PathVariable ( value = "id") long id, Model model) {
+	public String showFormForUpdate(@Valid @PathVariable ( value = "id") long id, Model model) {
 		
 		// get employee from the service
 		Employee employee = employeeService.getEmployeeById(id);
@@ -70,7 +72,7 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/deleteEmployee/{id}")
-	public String deleteEmployee(@PathVariable (value = "id") long id) {
+	public String deleteEmployee(@Valid @PathVariable (value = "id") long id) {
 		
 		// call delete employee method 
 		this.employeeService.deleteEmployeeById(id);
@@ -79,7 +81,7 @@ public class EmployeeController {
 	
 	
 	@GetMapping("/page/{pageNo}")
-	public String findPaginated(@PathVariable (value = "pageNo") int pageNo, 
+	public String findPaginated(@Valid @PathVariable (value = "pageNo") int pageNo,
 			@RequestParam("sortField") String sortField,
 			@RequestParam("sortDir") String sortDir,
 			ModelAndView model) {

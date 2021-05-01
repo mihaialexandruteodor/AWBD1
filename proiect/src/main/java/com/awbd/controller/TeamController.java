@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -54,9 +55,9 @@ public class TeamController {
     }
 
     @GetMapping("/pageT/{pageNo}")
-    public String findPaginated(@PathVariable (value = "pageNo") int pageNo,
-                                @RequestParam("sortField") String sortField,
-                                @RequestParam("sortDir") String sortDir,
+    public String findPaginated(@Valid @PathVariable (value = "pageNo") int pageNo,
+                                @Valid @RequestParam("sortField") String sortField,
+                                @Valid @RequestParam("sortDir") String sortDir,
                                 ModelAndView model) {
         int pageSize = 5;
 
@@ -87,7 +88,7 @@ public class TeamController {
 
 
     @RequestMapping(value = "/addEmployeeToTeam/{id}/{team}")
-    public String addEmployeeToTeam(@PathVariable (value = "id") long id, @PathVariable("team") long team){
+    public String addEmployeeToTeam(@Valid @PathVariable (value = "id") long id, @Valid @PathVariable("team") long team){
         Team teamObj = teamService.getTeamById(team);
         Employee employee = employeeService.getEmployeeById(id);
         teamService.addEmployeeToTeam(teamObj,employee);
@@ -95,7 +96,7 @@ public class TeamController {
     }
 
     @RequestMapping(value = "/removeEmployeeFromTeam/{id}/{team}")
-    public String removeEmployeeFromTeam(@PathVariable (value = "id") long id, @PathVariable("team") long team){
+    public String removeEmployeeFromTeam(@Valid @PathVariable (value = "id") long id, @Valid @PathVariable("team") long team){
         Team teamObj = teamService.getTeamById(team);
         Employee employee = employeeService.getEmployeeById(id);
         teamService.removeEmployeeFromTeam(teamObj,employee);
@@ -103,14 +104,14 @@ public class TeamController {
     }
 
     @PostMapping("/saveTeam")
-    public String saveTeam(@ModelAttribute("team") Team team) {
+    public String saveTeam(@Valid @ModelAttribute("team") Team team) {
         // save employee to database
         teamService.saveTeam(team);
         return "redirect:/showFormForUpdateTeam/"+team.getId();
     }
 
     @GetMapping("/showFormForUpdateTeam/{id}")
-    public String showFormForUpdate(@PathVariable ( value = "id") long id, Model model) {
+    public String showFormForUpdate(@Valid @PathVariable ( value = "id") long id, Model model) {
 
         // get employee from the service
         Team team = teamService.getTeamById(id);
@@ -129,7 +130,7 @@ public class TeamController {
     }
 
     @GetMapping("/deleteTeam/{id}")
-    public String deleteTeam(@PathVariable (value = "id") long id) {
+    public String deleteTeam(@Valid @PathVariable (value = "id") long id) {
 
         // call delete team method
         this.teamService.deleteTeamById(id);
