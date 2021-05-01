@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Client Management System</title>
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+  <h1>Client Management System</h1>
+  <hr>
+  <h2>Update Organisation</h2>
+
+  <form action="#" th:action="@{/saveOrganisation}" th:object="${organisation}"
+        method="POST">
+
+    <!-- Add hidden form field to handle update -->
+    <input type="hidden" th:field="*{organisationid}" />
+    <input type="text" th:field="*{organisationName}"
+           placeholder="Organisation Name" class="form-control mb-4 col-4">
+
+    <button type="submit" class="btn btn-info col-2"> Update Organisation</button>
+
+    <hr>
+    <br>
+    <h2>Current Organisation Members</h2>
+    <table border="1" class = "table table-striped table-responsive-md">
+      <thead>
+      <tr>
+        <th>
+          <a th:href="@{'/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">
+            Client First Name</a>
+        </th>
+        <th>
+          <a th:href="@{'/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">
+            Client Last Name</a>
+        </th>
+        <th> Actions </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="client : ${listClientsFromOrganisation}">
+        <td th:text="${client.firstName}"></td>
+        <td th:text="${client.lastName}"></td>
+        <td>
+          <a th:href="@{/removeClientFromOrganisation/{id}/{organisation}(id=${client.clientid}, organisation=${organisation.organisationid})}" class="btn btn-danger">Remove from organisation</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h2>Add Organisation Members</h2>
+    <table border="1" class = "table table-striped table-responsive-md">
+      <thead>
+      <tr>
+        <th>
+          <a th:href="@{'/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">
+            Client First Name</a>
+        </th>
+        <th>
+          <a th:href="@{'/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">
+            Client Last Name</a>
+        </th>
+        <th> Actions </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="client : ${listClients}">
+        <td th:text="${client.firstName}"></td>
+        <td th:text="${client.lastName}"></td>
+        <td>
+          <a th:href="@{/addClientToOrganisation/{id}/{organisation}(id=${client.clientid}, organisation=${organisation.organisationid})}" class="btn btn-primary">Add to organisation</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+
+  </form>
+
+  <a th:href = "@{/organisationPage}"> Back to previous page</a>
+</div>
+
+<div th:if = "${totalPages > 1}">
+  <div class = "row col-sm-10">
+    <div class = "col-sm-2">
+      Total Rows: [[${totalItems}]]
+    </div>
+    <div class = "col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+    </div>
+    <div class = "col-sm-1">
+      <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+      <span th:unless="${currentPage < totalPages}">Next</span>
+    </div>
+
+    <div class="col-sm-1">
+      <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+      <span th:unless="${currentPage < totalPages}">Last</span>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

@@ -6,11 +6,12 @@ import java.util.Set;
 @Entity
 @Table(name = "organisation")
 public class Organisation {
+
     @Id
     @GeneratedValue(strategy =  GenerationType.SEQUENCE)
     private long organisationid;
 
-    @Column(name = "name")
+    @Column(name = "organisation_name")
     private String organisationName;
 
     @OneToMany(mappedBy = "organisation", fetch = FetchType.LAZY)

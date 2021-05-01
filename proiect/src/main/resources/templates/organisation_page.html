@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Employee Management System</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
+</head>
+<body>
+
+<div class="container my-2">
+    <div class="container my-2">
+        <h1>Organisation List</h1>
+
+        <a th:href = "@{/showNewOrganisationForm}" class="btn btn-primary btn-sm mb-3"> Add Organisation </a>
+
+        <table border="1" class = "table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>
+                    <a th:href="@{'/pageO/' + ${currentPage} + '?sortField=organisationName&sortDir=' + ${reverseSortDir}}">
+                        Organisation Name</a>
+                </th>
+                <th>
+                    <a >
+                        Clients</a>
+                </th>
+                <th> Actions </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="organisation,iter  : ${listOrganisations}">
+                <td th:text="${organisation.organisationName}"></td>
+
+                <td>
+                <span th:each="client, iterStat:${clientSets[iter.index]}"
+                      th:with="clientName=${client.firstName} + ' ' +${client.lastName}  + ${iterStat.count != iterStat.size ? ',' : ''}"
+                      th:text="${clientName}"></span>
+                </td>
+
+                </td>
+
+                <td> <a th:href="@{/showFormForUpdateOrganisation/{id}(id=${organisation.organisationid})}" class="btn btn-primary">Update</a>
+                    <a th:href="@{/deleteOrganisation/{id}(id=${organisation.organisationid})}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a th:href = "@{/}"> Back to Main Page</a>
+
+    </div>
+</div>
+</body>
+</html>

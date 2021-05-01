@@ -2,6 +2,7 @@ package com.awbd.service;
 
 import com.awbd.model.Client;
 import com.awbd.model.Organisation;
+import com.awbd.repository.ClientRepository;
 import com.awbd.repository.OrganisationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,9 @@ public class OrganisationServiceImpl implements OrganisationService {
 
     @Autowired
     private OrganisationRepository organisationRepository;
+
+    @Autowired
+    private ClientRepository clientRepository;
 
     @Override
     public List<Organisation> getAllOrganisations() {
@@ -58,12 +62,16 @@ public class OrganisationServiceImpl implements OrganisationService {
     @Override
     public void addClient(Organisation organisation, Client client) {
         organisation.getClientList().add(client);
+        client.setOrganisation(organisation);
+        clientRepository.save(client);
         organisationRepository.save(organisation);
     }
 
     @Override
-    public void RemoveClient(Organisation organisation, Client client) {
+    public void removeClient(Organisation organisation, Client client) {
         organisation.getClientList().remove(client);
+        client.setOrganisation(null);
+        clientRepository.save(client);
         organisationRepository.save(organisation);
     }
 

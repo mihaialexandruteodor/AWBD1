@@ -30,7 +30,7 @@ public class OrganisationController {
     }
 
     public String loadOrganisationsPageData(ModelAndView model) {
-        return findPaginated(1, "name", "asc", model);
+        return findPaginated(1, "organisationName", "asc", model);
     }
 
     @RequestMapping("/organisationPage")
@@ -55,6 +55,13 @@ public class OrganisationController {
     public String saveOrganisation(@ModelAttribute("organisation") Organisation organisation) {
         // save organisation to database
         organisationService.saveOrganisation(organisation);
+        return "redirect:/organisationPage";
+    }
+
+    @GetMapping("/deleteOrganisation/{id}")
+    public String deleteOrganisation(@PathVariable (value = "id") long id) {
+
+        organisationService.deleteOrganisationById(id);
         return "redirect:/organisationPage";
     }
 
@@ -105,5 +112,21 @@ public class OrganisationController {
         model.addObject("listOrganisations", listOrganisations);
         model.addObject("clientSets", clientSets);
         return "index";
+    }
+
+    @RequestMapping(value = "/addClientToOrganisation/{id}/{organisation}")
+    public String addEmployeeToTeam(@PathVariable (value = "id") long id, @PathVariable("organisation") long organisation){
+        Client clientObj = clientService.getClientById(id);
+        Organisation organisationObj = organisationService.getOrganisationById(organisation);
+        organisationService.addClient(organisationObj, clientObj);
+        return "redirect:/showFormForUpdateOrganisation/"+organisation;
+    }
+
+    @RequestMapping(value = "/removeClientFromOrganisation/{id}/{organisation}")
+    public String removeClientFromOrganisation(@PathVariable (value = "id") long id, @PathVariable("organisation") long organisation){
+        Client clientObj = clientService.getClientById(id);
+        Organisation organisationObj = organisationService.getOrganisationById(organisation);
+        organisationService.removeClient(organisationObj,clientObj);
+        return "redirect:/showFormForUpdateOrganisation/"+organisation;
     }
 }

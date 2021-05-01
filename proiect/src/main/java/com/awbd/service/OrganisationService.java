@@ -13,5 +13,5 @@ public interface OrganisationService {
     void deleteOrganisationById(long id);
     Page<Organisation> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
     void addClient(Organisation organisation, Client client);
-    void RemoveClient(Organisation organisation, Client client);
+    void removeClient(Organisation organisation, Client client);
 }
